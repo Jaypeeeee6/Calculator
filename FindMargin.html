@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gross Profit and Margin Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            font-size: 24px;
+        }
+        label, input, button, p {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        span {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Gross Profit and Margin Calculator</h1>
+    <h5> ----------------------------------------------------------------------------------------<br>
+        Formula: <br> Revenue - Cost = Gross Profit <br> (Gross Profit / Revenue) * 100 = Margin
+        <br>----------------------------------------------------------------------------------------
+    </h5>
+    <label for="revenue">Revenue:</label>
+    <input type="number" id="revenue" step="0.01">
+    <br><br>
+    <label for="cost">Cost:</label>
+    <input type="number" id="cost" step="0.01">
+
+    <br><br>
+    <button onclick="calculate()">Calculate</button>
+
+    <br><br>
+    <p>Gross Profit: <span id="grossProfitResult"></span></p>
+    <p>Margin: <span id="marginResult"></span>%</p>
+
+    <script>
+        function calculate() {
+            const revenue = parseFloat(document.getElementById("revenue").value);
+            const cost = parseFloat(document.getElementById("cost").value);
+
+            if (isNaN(revenue) || isNaN(cost)) {
+                document.getElementById('grossProfitResult').innerText = "Please input revenue and cost to compute.";
+                document.getElementById('marginResult').innerText = "Please input revenue and cost to compute.";
+                return;
+            }
+
+            const grossProfit = revenue - cost;
+            const margin = (grossProfit / revenue) * 100;
+
+            document.getElementById("grossProfitResult").textContent = grossProfit.toFixed(2);
+            document.getElementById("marginResult").textContent = margin.toFixed(2);
+        }
+    </script>
+</body>
+</html>
