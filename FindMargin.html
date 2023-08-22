@@ -102,6 +102,20 @@
             grossProfitResult.textContent = grossProfit.toFixed(2);
             marginResult.textContent = margin.toFixed(2);
         }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('revenue').addEventListener('keyup', function(event) {
+                if (event.keyCode === 13) {
+                    calculate();
+                }
+            });
+
+            document.getElementById('cost').addEventListener('keyup', function(event) {
+                if (event.keyCode === 13) {
+                    calculate();
+                }
+            });
+        });
     </script>
 </body>
 </html>

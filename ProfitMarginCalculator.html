@@ -70,42 +70,59 @@
             margin-top: 10px;
         }
     </style>
-    <script>
-        function calculateProfit() {
-            var costPrice = parseFloat(document.getElementById('costPrice').value);
-            var marginPercentage = parseFloat(document.getElementById('marginPercentage').value);
-            var priceToCustomer = document.getElementById('priceToCustomer');
-            var calculatedProfit = document.getElementById('calculatedProfit');
+   <script>
+    function calculateProfit() {
+        var costPrice = parseFloat(document.getElementById('costPrice').value);
+        var marginPercentage = parseFloat(document.getElementById('marginPercentage').value);
+        var priceToCustomer = document.getElementById('priceToCustomer');
+        var calculatedProfit = document.getElementById('calculatedProfit');
 
-            if (isNaN(costPrice) || isNaN(marginPercentage)) {
-                priceToCustomer.innerText = "Please input cost price and desired profit margin to compute.";
-                calculatedProfit.innerText = "";
-                return;
-            }
-
-            var profit = costPrice / (1 - marginPercentage / 100);
-            var formattedProfit = profit.toFixed(2);
-
-            priceToCustomer.innerText = "Price to Customer: ";
-            calculatedProfit.innerText = formattedProfit;
+        if (isNaN(costPrice) || isNaN(marginPercentage)) {
+            priceToCustomer.innerText = "Please input cost price and desired profit margin to compute.";
+            calculatedProfit.innerText = "";
+            return;
         }
-    </script>
+
+        var profit = costPrice / (1 - marginPercentage / 100);
+        var formattedProfit = profit.toFixed(2);
+
+        var grossProfit = profit - costPrice;
+        var formattedGrossProfit = grossProfit.toFixed(2);
+
+        priceToCustomer.innerText = "Price to Customer: " + formattedProfit;
+        calculatedProfit.innerText = "Gross Profit: " + formattedGrossProfit;
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('calculator-form').addEventListener('keyup', function(event) {
+            if (event.keyCode === 13) {
+                calculateProfit();
+            }
+        });
+    });
+</script>
 </head>
 <body>
-    <div class="calculator-container">
-        <h1>Profit Margin Calculator</h1>
-        <h5>Formula(Additional percentage for buffer or margin) <br> Cost price / (1 - desired profit margin) <br> X / (1 - Y)</h5>
-        <form>
-            <label for="costPrice">Cost Price:</label>
-            <input type="number" id="costPrice" step="0.01" required>
-            <label for="marginPercentage">Desired Profit Margin (%):</label>
-            <input type="number" id="marginPercentage" step="0.01" required>
-            <button type="button" onclick="calculateProfit()">Calculate</button>
-        </form>
-        <div id="result-container">
-            <p id="priceToCustomer"></p>
-            <p id="calculatedProfit"></p>
-        </div>
+<div class="calculator-container">
+    <h1>Profit Margin Calculator</h1>
+    <h5>Formula(Additional percentage for buffer or margin) <br> Cost price / (1 - desired profit margin) <br> X / (1 - Y)</h5>
+    <form id="calculator-form">
+        <label for="costPrice">Cost Price:</label>
+        <input type="number" id="costPrice" step="0.01" required>
+        <label for="marginPercentage">Desired Profit Margin (%):</label>
+        <input type="number" id="marginPercentage" step="0.01" required>
+        <button type="button" onclick="calculateProfit()">Calculate</button>
+    </form>
+    <div id="result-container">
+        <p id="priceToCustomer"></p>
+        <p id="calculatedProfit"></p>
     </div>
+</div>
 </body>
 </html>
+
+
+
+
+
+
