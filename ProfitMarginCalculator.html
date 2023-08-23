@@ -64,13 +64,17 @@
             text-align: center;
         }
         #priceToCustomer, #calculatedProfit {
-            color: #007bff;
+            color: #0d0d0d;
             font-weight: bold;
             font-size: 24px;
             margin-top: 10px;
         }
     </style>
    <script>
+
+    function numberWithCommas(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
     function calculateProfit() {
         var costPrice = parseFloat(document.getElementById('costPrice').value);
         var marginPercentage = parseFloat(document.getElementById('marginPercentage').value);
@@ -84,10 +88,10 @@
         }
 
         var profit = costPrice / (1 - marginPercentage / 100);
-        var formattedProfit = profit.toFixed(2);
+        var formattedProfit = numberWithCommas(profit.toFixed(2));
 
         var grossProfit = profit - costPrice;
-        var formattedGrossProfit = grossProfit.toFixed(2);
+        var formattedGrossProfit = numberWithCommas(grossProfit.toFixed(2));
 
         priceToCustomer.innerText = "Price to Customer: " + formattedProfit;
         calculatedProfit.innerText = "Gross Profit: " + formattedGrossProfit;

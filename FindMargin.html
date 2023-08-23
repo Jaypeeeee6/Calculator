@@ -64,7 +64,7 @@
             text-align: center;
         }
         #grossProfitResult, #marginResult {
-            color: #007bff;
+            color: #0d0d0d;
         }
     </style>
 </head>
@@ -84,6 +84,9 @@
     </div>
     
     <script>
+        function numberWithCommas(x) {
+             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}   
         function calculate() {
             const revenue = parseFloat(document.getElementById("revenue").value);
             const cost = parseFloat(document.getElementById("cost").value);
@@ -99,8 +102,8 @@
             const grossProfit = revenue - cost;
             const margin = (grossProfit / revenue) * 100;
 
-            grossProfitResult.textContent = grossProfit.toFixed(2);
-            marginResult.textContent = margin.toFixed(2);
+            grossProfitResult.textContent = numberWithCommas(grossProfit.toFixed(2));
+            marginResult.textContent = numberWithCommas(margin.toFixed(2));
         }
 
         document.addEventListener('DOMContentLoaded', function() {
